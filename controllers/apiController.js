@@ -21,9 +21,4 @@ router.get('/rank/:apikey', (req, res) => {
     res.send(`rank : ${req.params.apikey}`);
 });
 
-router.get('/getapi', (req, res) => {
-    console.log(chalk.blue('api /'));
-    res.send("api");
-});
-
 export default router;
