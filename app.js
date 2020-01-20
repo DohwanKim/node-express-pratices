@@ -8,7 +8,7 @@ import pageController from './controllers/pageController.js';
 import authController from './controllers/authController.js';
 import bodyParser from 'body-parser';
 
-const PORT = 4000; //static 고정들은 대문자 써주기
+const PORT = 80; //static 고정들은 대문자 써주기
 
 const app = express();
 
@@ -26,4 +26,4 @@ app.use('/api', apiController);
 app.use('/auth', authController);
 
 
-app.listen(PORT, () => console.log(chalk.black.bgBlue `Example app listening on port ${PORT}!`));
+app.listen(process.env.PORT || PORT, () => console.log(chalk.black.bgBlue `Example app listening on port ${PORT}!`));
