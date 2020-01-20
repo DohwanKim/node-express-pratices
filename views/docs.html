@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -7,22 +7,30 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-
 <body>
-  <h1>Movie API (create deok9)</h1>
-  <hr>
-  <h2>API Docs</h2>
-  <h3>&nbsp; : http://localhost:8080</h3>
-  <br>
-  <hr>
-  <h2>Get API (need {id} & {pw})</h2>
-  <h3>&nbsp;&nbsp; : curl -u {id}:{pw} http://localhost:8080/api/getapi</h3>
-  <br>
-  <hr>
-  <h2>SearchMovie (need {apikey})</h2>
-  <h3>&nbsp;&nbsp; : curl http://localhost:8080/api/find/{title}/{apikey}</h3>
-  <br>
-  <h2>Ranking (need {apikey})</h2>
-  <h3>&nbsp;&nbsp; : curl http://localhost:8080/api/rank/{apikey}</h3>
+<h1>Movie API (create DoHwan, thanks for help deok9)</h1>
+<hr>
+<h2>API Docs(Page)</h2>
+<h3> : https://movie-nodejs.herokuapp.com</h3>
+<h2>User Register(Page)</h2>
+<h3> : https://movie-nodejs.herokuapp.com/register</h3>
+<h3> : curl --location --request POST 'http://localhost:4000/auth/create'
+  <h3> --header 'Content-Type: application/x-www-form-urlencoded' \ </h3>
+  <h3> --data-urlencode 'id={id}' \ </h3>
+  <h3> --data-urlencode 'pw={pw}' \ </h3>
+  <h3> --data-urlencode 'name={name}' \ </h3>
+  <h3> --data-urlencode 'email={email}' </h3>
+</h3>
+<h2>User Login</h2>
+<h3> : curl -u {id}:{password} --request POST https://movie-nodejs.herokuapp.com/auth/login</h3>
+<h3> - return bearer token</h3>
+<br>
+<hr>
+<h2>SearchMovie (need Bearer token)</h2>
+<h3> : curl https://movie-nodejs.herokuapp.com/api/search/{title} -H 'Authorization: Bearer token'</h3>
+<br>
+<hr>
+<h2>Ranking (need Bearer token)</h2>
+<h3> : curl https://movie-nodejs.herokuapp.com/api/rank -H 'Authorization: Bearer token'</h3>
 </body>
 </html>
