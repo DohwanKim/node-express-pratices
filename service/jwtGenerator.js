@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const PRIVATE_KEY = 'secret';
+const PRIVATE_KEY = 'private_secret_key';
 const EXPIRED_SECOND = 60 * 60; //만료 시간 (분)
 
 // JWT 만드는 역할
