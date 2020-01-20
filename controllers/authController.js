@@ -2,20 +2,9 @@ import { Router } from 'express';
 import {createUser, findUser} from "../models/userModel";
 import crypto from 'crypto';
 import chalk from "chalk";
+import { generate } from "../service/jwtGenerator";
 
 let router = Router();
-
-//미들웨어
-//데이터 가기 전에 실행 시킬 명령구
-// router.use((req, res, next) => {
-//     // TODO : require Auth
-//     // 여기서 인증 검색을 할 것. 인증을 했을때 타당한 사람인가?
-//     // ex)
-//     // const authFail = true;
-//     // if(authFail) throw "AuthFail";
-//
-//     next();
-// });
 
 router.post('/login', async (req, res) => {
     const base64_token = req.headers.authorization.split(" ")[1];
@@ -23,17 +12,17 @@ router.post('/login', async (req, res) => {
     let law_token = buff.toString('ascii');
     let law_id = law_token.split(":")[0];
     let law_password = law_token.split(":")[1];
-
     let userData = await findUser(law_id);
+
     let hashPW = cryptoPW(userData.salt, law_password);
 
     if(userData.pw === hashPW) {
-        res.send('succsss');
+        let jwtToken = generate(law_id, userData.name, userData.email);
+        res.send(jwtToken);
     } else {
-        res.send('auth fail');
+        res.status(401).send({error: "Wrong Id or PW"});
     }
 });
-
 
 function cryptoPW(salt, pw) {
     let hash = crypto.createHmac('sha256', salt);

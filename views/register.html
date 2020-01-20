@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>Register</title>
+</head>
+<body>
+<div class="container bg-secondary" style="height:400px; width:500px; position: absolute; top:50%; left: 50%; margin-top:-200px; margin-left:-250px;">
+  <div class="row justify-content-center">
+    <div class="col-6"><h1 class="text-center m-3 text-white">Register</h1></div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <input class="col-8 form-id" placeholder="id (ex: deok)">
+  </div>
+  <div class="row justify-content-center mt-3">
+    <input class="col-8 form-pw" placeholder="password" type="password">
+  </div>
+  <div class="row justify-content-center mt-3">
+    <input class="col-8 form-email" placeholder="email" type="email">
+  </div>
+  <div class="row justify-content-center mt-3">
+    <input class="col-8 form-name" placeholder="name">
+  </div>
+  <div class="row justify-content-center mt-5">
+    <button class="col-4 btn btn-primary submit">Submit</button>
+  </div>
+</div>
+
+<script>
+    const sendUrl = `http://localhost:4000/auth/create`;
+
+    $(".submit").click((e) => {
+        register(e.target);
+    });
+
+    function register(target) {
+        const data = {
+            id : $(".form-id").val(),
+            pw : $(".form-pw").val(),
+            name : $(".form-name").val(),
+            email : $(".form-email").val()
+        };
+        const ajaxOptions = {
+            url: sendUrl,
+            method: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data,
+            timeout: 3000
+        };
+
+        target.disabled = true;
+        $.ajax(ajaxOptions).done(function() {
+            alert( "success" );
+        }).fail(function() {
+            alert( "Network Error" );
+        }).always(function() {
+            target.disabled = false;
+        });
+    }
+</script>
+</body>
+</html>
